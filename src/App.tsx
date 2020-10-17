@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+import Header from './components/header';
+import Posts from './components/posts';
+
+const App = () => {
+  const [search, setSearch] = useState("all");
+  const [posts, setPosts] = useState();
+ 
+  const updatePosts = () => {
+    (async () => {
+      const res = await fetch(`https://www.reddit.com/r/${search}.json`);
+      const data = await res.json();
+      setPosts(data.data.children);
+    })();
+  }
+
+  const searchSubmit = (newSearch: string) => setSearch(newSearch);
+
+  useEffect(updatePosts, [search]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header submitFunction={searchSubmit} />
+      <Posts posts={posts} id="posts"/>
     </div>
   );
 }

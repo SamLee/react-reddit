@@ -1,0 +1,32 @@
+.searchbar {
+  align-items: center;
+  background-color: #202225;
+  border-radius: 5px;
+  border-style: none;
+  display: flex;
+  height: 90%;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+.searchbar input {
+  background-color: inherit;
+  border-style: none;
+  color: #DCDDDE;
+  padding-right: 1vw;
+  width: 100%;
+}
+
+.searchbar ::placeholder {
+  color: #989B9E;
+}
+
+.searchbar label {
+  color: #989B9E;
+  display: flex;
+  padding-left: 5px;
+}
+
