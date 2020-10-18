@@ -18,6 +18,10 @@ const Posts: React.FC<any> = ({ posts }) => {
             crossPost={post.data.crosspost_parent_list}
             url={post.data.is_video ? post.data.media.reddit_video.fallback_url : post.data.url}
             thumbnail={post.data.thumbnail}
+            user={post.data.author}
+            flairs={post.data.author_flair_richtext}
+            comments={post.data.num_comments}
+            upvotes={post.data.ups}
           />
         })  
       }

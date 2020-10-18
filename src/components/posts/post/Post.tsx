@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Post.css';
 import { ExpandLess, ExpandMore } from '@material-ui/icons/';
 import ReactMarkdown from 'react-markdown';
+import Info from './info';
 
 type PostProps = {
   title: string,
@@ -11,10 +12,14 @@ type PostProps = {
   isVideo: boolean,
   crossPost: any,
   url: string,
-  thumbnail: string
+  thumbnail: string,
+  user: string,
+  flairs: Array<{a?: string, e: string, u?: string, t?: string}>,
+  comments: number,
+  upvotes: number,
 }
 
-const Post: React.FC<PostProps> = ({ title, selftext, isSelf, isMedia, isVideo, crossPost, url, thumbnail }) => {
+const Post: React.FC<PostProps> = ({ title, selftext, isSelf, isMedia, isVideo, crossPost, url, thumbnail, user, flairs, comments, upvotes }) => {
   const [isExpanded, toggleExpand] = useState(false);
   const handleToggleExpand = () => toggleExpand(!isExpanded);
   const content = () => {
@@ -28,14 +33,15 @@ const Post: React.FC<PostProps> = ({ title, selftext, isSelf, isMedia, isVideo, 
   };
 
   return (
-    <div className="post" style={{paddingBottom: isExpanded ? "1vw" : "0px"}}>
+    <div className="post">
       <div className="postHeader" onClick={handleToggleExpand}>
         <h2>{title}</h2>
         <div className="expand">{ isExpanded ? <ExpandLess /> : <ExpandMore /> }</div>
       </div>
       <div className="expandible" style={{display: isExpanded ? "flex" : "none"}}>
         { content() }
-      </div> 
+      </div>
+      <Info user={user} flairs={flairs} comments={comments} upvotes={upvotes} /> 
     </div>
   );
 }
